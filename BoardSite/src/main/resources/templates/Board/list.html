@@ -1,0 +1,108 @@
+<!doctype html>
+<html xmlns:th="http:/www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/common :: head('Board')">
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check" viewBox="0 0 16 16">
+    <title>Check</title>
+    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+  </symbol>
+</svg>
+
+  <div class="container py-3">
+    <header>
+
+      <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom" th:replace="fragments/common :: menu">
+      </div>
+
+      <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal">Board</h1>
+        <!--    <p class="fs-5 text-muted">Hello</p>-->
+      </div>
+    </header>
+  </div>
+
+  <div class="container">
+    <div class="text-end my-3">
+      <input class="me-2" type="text" placeholder="search" id="searchkeyword" th:value="${keyword}">
+      <button class="btn btn-outline-success btn-sm" type="button" id="btn_search">Search</button>
+    </div>
+      <div class="text-start">총 건수 :<span th:text="${total}"></span> </div>
+      <table class="table table-striped">
+        <colgroup>
+          <col style="width:10%">
+          <col style="width:60%">
+          <col style="width:20%">
+          <col style="width:10%">
+        </colgroup>
+        <!--<caption>List of users</caption>-->
+        <thead>
+        <tr class="text-center">
+          <th scope="col">번호</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성자</th>
+          <th scope="col">조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board : ${board}" class="text-center">
+          <td th:text="${board.id}">id</td>
+          <td>
+            <a th:text="${board.title}" th:href="@{/board/view/{id}(id=${board.id})}"></a>
+          </td>
+          <td th:text="${board.name}">name</td>
+          <td th:text="${board.count}">count</td>
+        </tr>
+        </tbody>
+      </table>
+
+    <!-- 페이징처리 시작 -->
+    <div th:if="${!board.isEmpty()}">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${!board.hasPrevious} ? 'disabled'">
+          <a class="page-link"
+             href="javascript:void(0)" th:data-page="${board.number-1}">
+            <span>이전</span>
+          </a>
+        </li>
+        <li th:each="page: ${#numbers.sequence(0, board.totalPages-1)}"
+            th:if="${page >= board.number-5 and page <= board.number+5}"
+            th:classappend="${page == board.number} ? 'active'"
+            class="page-item">
+          <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
+        </li>
+        <li class="page-item" th:classappend="${!board.hasNext} ? 'disabled'">
+          <a class="page-link" href="javascript:void(0)" th:data-page="${board.number+1}">
+            <span>다음</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- 페이징처리 끝 -->
+    <form th:action="@{/board/list}" method="get" id="searchForm">
+      <input type="hidden" id="keyword" name="keyword" th:value="${keyword}">
+      <input type="hidden" id="page" name="page" th:value="${board.number}">
+    </form>
+      <div class="text-end">
+        <button type="button" class="btn btn-primary" onclick="location.href='/board/write'">작성</button>
+      </div>
+  </div>
+<script layout:fragment="script" type='text/javascript'>
+  const page_elements = document.getElementsByClassName("page-link");
+  Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+      document.getElementById('page').value = this.dataset.page;
+      document.getElementById('searchForm').submit();
+    });
+  });
+  const btn_search = document.getElementById("btn_search");
+  btn_search.addEventListener('click', function() {
+    document.getElementById('keyword').value = document.getElementById('searchkeyword').value;
+    document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+    document.getElementById('searchForm').submit();
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>

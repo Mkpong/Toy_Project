@@ -19,6 +19,6 @@
 
 ### 5. spring security를 통해 권한을 부여하고 권한에 따른 접속 허용 설정
 
-### 6. Aws-lightsale/Amazon Linux를 이용한 project 배포
+### 6. Aws-lightsale/Amazon Linux2를 이용한 project 배포
 
 

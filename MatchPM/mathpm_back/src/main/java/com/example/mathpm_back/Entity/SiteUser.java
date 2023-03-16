@@ -13,21 +13,30 @@ public class SiteUser {
     private int id;
 
     @Column(name = "userid")
-    private String userid;
+    private String userId;
     @Column(name = "userpassword")
-    private String userpassword;
+    private String userPassword;
 
     @Column(name = "name")
-    private String name;
+    private String userName;
+
+    @Column(name = "year")
+    private String userYear;
+
+    @Column(name = "month")
+    private String userMonth;
+
+    @Column(name = "day")
+    private String userDay;
+
+    @Column(name = "sex")
+    private String userSex;
 
     @Column(name = "email")
-    private String email;
+    private String userEmail;
 
     @Column(name ="phonenumber")
-    private String phonenumber;
-
-
-
+    private String userPhonenumber;
 
 
 }

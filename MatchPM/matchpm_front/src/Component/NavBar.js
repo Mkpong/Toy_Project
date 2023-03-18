@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button'
 
 function NavBar(){
 
@@ -15,6 +16,22 @@ function NavBar(){
     axios.get('/api/logout')
     .catch(error => console.log(error))
   }
+
+  useEffect(() => {
+    const checklogin = async() =>{
+      const response = await axios.get('/api/siteuser/getid')
+      setUsername(response.data);
+      console.log(response.data);
+  
+      if(response.data === ""){
+        setch(false);
+      }
+      else{
+        setch(true);
+      }
+    }
+    checklogin();
+  } , [])
 
     return(
         <Navbar bg="light" expand="lg">
@@ -33,10 +50,10 @@ function NavBar(){
             </Nav>
               {ch ? (
                       <div>
-                      <Navbar.Text class="mx-3">
+                      <Navbar.Text className="mx-3">
                         Signed in as: {username}
                       </Navbar.Text>
-                      <button type="button" onClick={logout}>Logout</button>
+                      <Button type="button" onClick={logout}>Logout</Button>
                       </div>
                       ):(
                         <Nav.Link href="/login" className='mx-3'>Login</Nav.Link>

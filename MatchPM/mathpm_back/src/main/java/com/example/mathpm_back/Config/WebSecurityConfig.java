@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
@@ -20,6 +21,8 @@ public class WebSecurityConfig{
 
     @Autowired
     private DataSource dataSource;
+
+    private AuthenticationFailureHandler LoginFailHandler;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -39,10 +42,11 @@ public class WebSecurityConfig{
                 .loginPage("/login")
                 .loginProcessingUrl("/api/login")
                 .defaultSuccessUrl("http://localhost:3000/")
+                .failureHandler(LoginFailHandler)
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
-                .logoutSuccessUrl("http://localhost:3000/")
+                .logoutSuccessUrl("/logout")
                 .invalidateHttpSession(true)
         ;
 

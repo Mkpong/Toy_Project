@@ -5,23 +5,33 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useState , useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button'
+import { useNavigate } from 'react-router-dom';
+import { NavDropdown } from 'react-bootstrap';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
 
 function NavBar(){
 
+  const navigate = useNavigate();
+
   const [ch , setch] = useState(false);
-  const [username , setUsername] = useState("");
+  const [userId , setUserId] = useState("");
+  const [userrole , setUserrole] = useState("");
 
 
   const logout = () => {
     axios.get('/api/logout')
     .catch(error => console.log(error))
+    setch(false);
+    navigate("/")
   }
 
   useEffect(() => {
     const checklogin = async() =>{
       const response = await axios.get('/api/siteuser/getid')
-      setUsername(response.data);
-      console.log(response.data);
+      const response2 = await axios.get('/api/siteuser/getauthentication')
+      setUserId(response.data);
+      setUserrole(response2.data[0]);
   
       if(response.data === ""){
         setch(false);
@@ -34,9 +44,9 @@ function NavBar(){
   } , [])
 
     return(
-        <Navbar bg="light" expand="lg">
-        <Container fluid>
-          <Navbar.Brand href="/">Mkpong</Navbar.Brand>
+      <Container fluid style={{maxWidth: '1600px' , borderRadius: '50px 50px'}}>
+        <Navbar bg="light" expand="lg" style={{borderRadius: '20px 20px'}}>
+          <Navbar.Brand href="/" className='mx-2'>Mkpong</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -50,18 +60,25 @@ function NavBar(){
             </Nav>
               {ch ? (
                       <div>
-                      <Navbar.Text className="mx-3">
-                        Signed in as: {username}
+                      <Nav>
+                      <Navbar.Text>
+                        Signed in as: 
                       </Navbar.Text>
-                      <Button type="button" onClick={logout}>Logout</Button>
+                      <NavDropdown id='user_drop' title={userId} menuVariant='dark' className='fw-bold'>
+                        <NavDropdown.Item href={`/mypage/${userId}`}>MyPage</NavDropdown.Item>
+                        <NavDropdown.Item href="#">MyProject</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+                      </NavDropdown>
+                      </Nav>
                       </div>
                       ):(
                         <Nav.Link href="/login" className='mx-3'>Login</Nav.Link>
                       )
               }
           </Navbar.Collapse>
-        </Container>
       </Navbar>
+      </Container>
     );
 }
 

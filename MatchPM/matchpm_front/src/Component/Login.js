@@ -8,8 +8,11 @@ import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs'
+import Alert from 'react-bootstrap/Alert'
 
 function Login() {
+
+  const [check , setCheck] = useState(true);
 
   const axiosConfig = {
     Headers:{
@@ -32,15 +35,19 @@ function Login() {
   })
   }
 
-  const login = () => {
-    axios.post('/api/login' , qs.stringify(logindata) , axiosConfig)
-    navigate("/")
+  const login = async() => {
+    const response = await axios.post('/api/login' , qs.stringify(logindata) , axiosConfig)
+    if(response.data === "FAIL"){
+      setCheck(false);
+    }else{
+      navigate("/");
+    }
   }
 
 
 
   return (
-      <Container style={{backgroundColor: 'lightblue' , maxWidth: '500px'}}>
+      <Container style={{backgroundColor: 'lightblue' , maxWidth: '500px' , borderRadius: '50px 50px'}}>
         <Row className='text-center fw-bold my-5'>
           <h2 className='my-2'>Sign in</h2>
         </Row>
@@ -69,6 +76,14 @@ function Login() {
 
         <Row className='text-center'>
           <p>Don`t have an account?<a href='/register' className='link-info'>Register here</a></p>
+        </Row>
+
+        <Row className='text-center justify-content-center'>
+          <Col lg='10'>
+            {!check && (<Alert key='danger' variant='danger'>
+            Invalid ID or PassWord
+            </Alert>)}
+          </Col>
         </Row>
 
       <Row className='my-3 text-center'>

@@ -208,7 +208,7 @@ function Register() {
     }
     
     return (
-        <Container style={{backgroundColor: 'lightblue'}}>
+        <Container style={{backgroundColor: 'lightblue' , borderRadius: '50px 50px'}}>
             <Row className='text-center fw-bold my-5'>
                 <h2>Sign up</h2>
             </Row>
@@ -225,7 +225,7 @@ function Register() {
                 </Col>
                 <Col lg="3">
                     <div>ID중복확인</div>
-                    <Button variant='primary' size="sm" className='my-2' onClick={CheckID}>ID CHECK</Button>
+                    <Button variant='secondary' size="sm" className='my-2' onClick={CheckID}>ID CHECK</Button>
                 </Col>
             </Row>
 
@@ -347,12 +347,12 @@ function Register() {
             </Row>
 
 
-            <Row className="text-start my-2">
-                <Col lg='1'>
-                <Button variant="primary" onClick={() => {
+            <Row className="text-center my-2 justify-content-center">
+                <Col lg='2'>
+                <Button variant="dark" onClick={() => {
                     console.log(user);
                     RegisterCheck();
-                }}>test</Button>
+                }}>Register</Button>
                 </Col>
             </Row>
 

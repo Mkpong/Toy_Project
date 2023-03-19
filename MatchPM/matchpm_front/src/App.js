@@ -5,6 +5,7 @@ import Home from './Component/Home';
 import NavBar from './Component/NavBar';
 import Login from './Component/Login';
 import Register from './Component/Register';
+import MyPage from './Component/Mypage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/mypage/:userid" element={<MyPage />} />
       </Routes>
     </div>
   );

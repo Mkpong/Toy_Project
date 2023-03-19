@@ -1,16 +1,16 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button'
 import axios from 'axios';
+import { Container } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
 
 function Home() {
     return (
-        <div>
-            <Button variant='primary' onClick={() => {
-                axios.get('/api/siteuser/getid')
-                .then(response => console.log(response.data))
-                .catch(error => console.log(error))
-            }}>Check</Button>
-        </div>
+        <Container style={{maxWidth: '1200px' , backgroundColor: 'lightblue'}}>
+            <Row className='justify-content-center'>
+                HOME!
+            </Row>
+        </Container>
     );
 }
 

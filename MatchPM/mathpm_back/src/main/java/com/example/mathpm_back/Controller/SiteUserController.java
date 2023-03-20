@@ -49,4 +49,10 @@ public class SiteUserController {
         return siteUserService.finduser(requestBody.get("userId"));
     }
 
+    @PostMapping("/api/siteuser/getskill")
+    public List<String> findSkill(@RequestBody Map<String ,String> requestBody){
+        String userId = requestBody.get("userId");
+        return siteUserService.findSkill(userId);
+    }
+
 }

@@ -38,5 +38,14 @@ public class SiteUser {
     @Column(name ="phonenumber")
     private String userPhonenumber;
 
+    @Column(name ="introduce")
+    private String userIntroduce;
+
+    @Column(name = "skill")
+    private String userSkill;
+
+    @Column(name = "pmscore")
+    private int userPmscore;
+
 
 }

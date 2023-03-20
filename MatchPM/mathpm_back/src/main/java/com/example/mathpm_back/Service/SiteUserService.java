@@ -5,6 +5,8 @@ import com.example.mathpm_back.Repository.SiteUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +22,24 @@ public class SiteUserService {
         }
         else{
             return null;
+        }
+    }
+
+    public List<String> findSkill(String userId){
+        Optional<SiteUser> op_siteUser = siteUserRepository.findByUserId(userId);
+        SiteUser siteUser = op_siteUser.get();
+        List<String> userSkill = new ArrayList<>();
+        if(siteUser != null){
+            String skill = siteUser.getUserSkill();
+            if(skill == null) return userSkill;
+            String[] data = skill.split("_");
+            for(int i = 0 ; i < data.length ; i++){
+                userSkill.add(data[i]);
+            }
+            return userSkill;
+        }
+        else{
+            return userSkill;
         }
     }
 

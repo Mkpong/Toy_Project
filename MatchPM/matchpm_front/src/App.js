@@ -6,6 +6,7 @@ import NavBar from './Component/NavBar';
 import Login from './Component/Login';
 import Register from './Component/Register';
 import MyPage from './Component/Mypage';
+import Modify from './Component/Modify';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/mypage/:userid" element={<MyPage />} />
+        <Route path="/mypage/modify/:userid" element={<Modify />} />
       </Routes>
     </div>
   );

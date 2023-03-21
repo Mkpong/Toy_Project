@@ -9,7 +9,7 @@ function UserProject() {
         <div>
         <Container style={{maxWidth: '1200px'}}>
         <Row className='text-center'>
-                <Col style={{fontSize:'30px'}} className='fw-bold my-2'>User Project</Col>
+            <Col style={{fontSize:'30px'}} className='fw-bold my-2'>User Project</Col>
         </Row>
         </Container>
         </div>

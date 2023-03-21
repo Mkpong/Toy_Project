@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import { ListGroup , Form , Button} from 'react-bootstrap';
 import Infolist from '../Function/Infolist';
 import axios from 'axios';
+import Modify from './Modify';
 
 function UserInfo(props){
 
@@ -14,7 +15,7 @@ function UserInfo(props){
     const [userbirth , setUserbirth] = useState("");
 
     const skilllist = skills.map((skill) => (
-        <ListGroup.Item as="li">{skill}</ListGroup.Item>
+        <ListGroup.Item as="li" key ={skill}>{skill}</ListGroup.Item>
     ))
 
     useEffect(() => {
@@ -22,6 +23,7 @@ function UserInfo(props){
         .then(response => {
             setUser(response.data);
             setUserbirth(response.data.userYear + "-" + response.data.userMonth + "-" + response.data.userDay);
+            console.log(response.data)
         })
         .catch(error => console.log(error));
 
@@ -41,36 +43,42 @@ function UserInfo(props){
             </Row>
             <Row  className='justify-content-center'>
                 <Col md={4}>
-                <Container style={{backgroundColor:'lightyellow' , float: 'left' , borderRadius: '20px 20px' , minHeight: '600px' , maxHeight: '600px'}} className='text-center'>
-                    <Row className='my-4 mt-5'>
-                        <Col className='fw-bold'>{user.userName}</Col>
-                    </Row>
+                <Container style={{float: 'left' , borderRadius: '20px 20px' , minHeight: '600px' , maxHeight: '600px'}} className='text-center'>
                     <Row>
-                        <Col className='fw-bold'>Who Am I?</Col>
+                        <Container style={{backgroundColor: 'lightyellow' , maxHeight: '300px' , minHeight: '300px', borderRadius: '20px 20px'}}>
+                            <Row className='my-4 mt-5'>
+                                <Col className='fw-bold'>{user.userName}</Col>
+                            </Row>
+                            <Row className='my-3 mx-2'>
+                                <div style={{borderColor: 'black', borderWidth: '1px' , borderStyle: 'solid', borderRadius: '10px 10px' , height: '200px'}}>{user.userIntroduce}</div>
+                            </Row>
+                        </Container>
                     </Row>
-                    <Row className='my-3 mx-2'>
-                        <div style={{borderColor: 'black' , borderWidth: '1px' , borderStyle: 'solid' ,borderRadius: '10px 10px'}}>{user.userIntroduce}</div>
-                    </Row>
-                    <Row className='my-3'>
-                        <Col className='fw-bold'>Skill</Col>
-                    </Row>
-                    <Row className='text-center'>
-                    <div style={{height: '150px' , overflowY: 'scroll'}}>
-                    <ListGroup as="ol" numbered>
-                        {skilllist}
-                    </ListGroup>
-                    </div>
-                    </Row>
-                    <Row className='my-4'>
-                        <Col className='fw-bold'>PM SCORE : {user.userPmscore}</Col>
+                    <Row className='mt-3'>
+                        <Container style={{backgroundColor: 'lightblue' , maxHeight: '300px' , minHeight: '300px', borderRadius: '20px 20px'}}>
+                        <Row className='my-3'>
+                            <Col className='fw-bold'>Skill</Col>
+                        </Row>
+                        <Row className='text-center'>
+                        <div style={{height: '150px' , overflowY: 'scroll'}}>
+                        <ListGroup as="ol" numbered>
+                            {skilllist}
+                        </ListGroup>
+                        </div>
+                        </Row>
+                        <Row className='my-4'>
+                            <Col className='fw-bold'>PM SCORE : {user.userPmscore}</Col>
+                        </Row>
+                        </Container>
                     </Row>
                 </Container>
                 </Col>
+                
 
 
                 <Col md={4}>
-                <Container style={{backgroundColor:'lightgreen' , float:'right' , borderRadius: '20px 20px', minHeight: '600px' , maxHeight: '600px'}}>
-                    <Row className='mt-5'>
+                <Container style={{backgroundColor:'lightgreen' , float:'right' , borderRadius: '20px 20px', minHeight: '620px' , maxHeight: '620px'}}>
+                    <Row style={{marginTop: '80px'}}>
                     <Infolist id="ID" data={user.userId}></Infolist>
                     <Infolist id="Name" data={user.userName}></Infolist>
                     <Infolist id="Birth" data={userbirth}></Infolist>

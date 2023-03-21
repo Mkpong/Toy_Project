@@ -300,7 +300,7 @@ function Register() {
                 <Col lg='1'>
                     <Form.Label htmlFor="userSex">Sex</Form.Label>
                     <Form.Select id="userSex" onChange={onChangeSex}>
-                        <option>----</option>
+                        <option value="">----</option>
                         <option value='남'>남</option>
                         <option value='여'>여</option>
                     </Form.Select>

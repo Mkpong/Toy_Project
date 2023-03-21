@@ -31,7 +31,9 @@ public class SiteUserService {
         List<String> userSkill = new ArrayList<>();
         if(siteUser != null){
             String skill = siteUser.getUserSkill();
-            if(skill == null) return userSkill;
+            if(skill == null || skill.equals("")){
+                return userSkill;
+            }
             String[] data = skill.split("_");
             for(int i = 0 ; i < data.length ; i++){
                 userSkill.add(data[i]);
@@ -40,6 +42,15 @@ public class SiteUserService {
         }
         else{
             return userSkill;
+        }
+    }
+
+    public String modifySiteUser(int id, SiteUser siteUser){
+        Optional<SiteUser> op_user = siteUserRepository.findById(id);
+        if(op_user == null) return "fail";
+        else{
+            siteUserRepository.save(siteUser);
+            return "success";
         }
     }
 

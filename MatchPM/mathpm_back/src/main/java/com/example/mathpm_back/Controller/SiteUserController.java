@@ -55,4 +55,10 @@ public class SiteUserController {
         return siteUserService.findSkill(userId);
     }
 
+    @PostMapping("/api/siteuser/modify")
+    public String modifySiteUser(@RequestBody SiteUser siteUser){
+        int id = siteUser.getId();
+        return siteUserService.modifySiteUser(id, siteUser);
+    }
+
 }

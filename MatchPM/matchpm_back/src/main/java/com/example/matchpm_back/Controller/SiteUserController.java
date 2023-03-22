@@ -61,4 +61,15 @@ public class SiteUserController {
         return siteUserService.modifySiteUser(id, siteUser);
     }
 
+    @PostMapping("/api/siteuser/delete")
+    public String deleteSiteUser(@RequestBody Map<String , String> requestBody){
+        String userId = requestBody.get("userId");
+        return siteUserService.deleteSiteUser(userId);
+    }
+
+    @GetMapping("/api/siteuser/alluser")
+    public List<SiteUser> getAllUser(){
+        return siteUserService.getAllUser();
+    }
+
 }

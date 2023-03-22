@@ -10,4 +10,9 @@ public class LoginController {
     public String Login(){
         return "FAIL";
     }
+
+    @GetMapping("/logout")
+    public String Logout() {
+        return "LOGOUT";
+    }
 }

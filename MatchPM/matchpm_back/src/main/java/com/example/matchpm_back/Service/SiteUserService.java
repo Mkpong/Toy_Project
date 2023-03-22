@@ -54,4 +54,16 @@ public class SiteUserService {
         }
     }
 
+    public List<SiteUser> getAllUser(){
+        return siteUserRepository.findAll();
+    }
+
+    public String deleteSiteUser(String userId){
+        Optional<SiteUser> op_siteUser = siteUserRepository.findByUserId(userId);
+        if(op_siteUser == null) return "fail";
+        SiteUser siteUser = op_siteUser.get();
+        siteUserRepository.deleteById(siteUser.getId());
+        return "success";
+    }
+
 }

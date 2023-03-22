@@ -47,7 +47,7 @@ function Login() {
 
 
   return (
-      <Container style={{backgroundColor: 'lightblue' , maxWidth: '500px' , borderRadius: '50px 50px'}}>
+      <Container style={{backgroundColor: 'lightblue' , maxWidth: '500px' , borderRadius: '50px 50px' , marginTop: '200px'}}>
         <Row className='text-center fw-bold my-5'>
           <h2 className='my-2'>Sign in</h2>
         </Row>

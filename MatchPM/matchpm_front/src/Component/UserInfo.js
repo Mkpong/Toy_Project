@@ -6,6 +6,7 @@ import { ListGroup , Form , Button} from 'react-bootstrap';
 import Infolist from '../Function/Infolist';
 import axios from 'axios';
 import Modify from './Modify';
+import { useNavigate } from 'react-router-dom';
 
 function UserInfo(props){
 
@@ -13,6 +14,7 @@ function UserInfo(props){
     const [skills, setSkills] = useState([]);
     const userId = props.id;
     const [userbirth , setUserbirth] = useState("");
+    const navigate = useNavigate();
 
     const skilllist = skills.map((skill) => (
         <ListGroup.Item as="li" key ={skill}>{skill}</ListGroup.Item>
@@ -23,34 +25,31 @@ function UserInfo(props){
         .then(response => {
             setUser(response.data);
             setUserbirth(response.data.userYear + "-" + response.data.userMonth + "-" + response.data.userDay);
-            console.log(response.data)
         })
         .catch(error => console.log(error));
 
         axios.post('/api/siteuser/getskill' , {userId})
         .then(response => {
             setSkills(response.data);
-            console.log(response.data);
         })
         .catch(error => console.log(error));
     } , [])
 
+
     return (
-        <div style={{backgroundColor: 'gray'}}>
-        <Container style={{maxWidth: '1200px' , backgroundColor: 'gray'}}>
-            <Row className='text-center'>
-                <Col style={{fontSize:'30px'}} className='fw-bold my-2'>User Info</Col>
-            </Row>
+        <div>
+        <Container style={{maxWidth: '1200px'}}>
+
             <Row  className='justify-content-center'>
                 <Col md={4}>
-                <Container style={{float: 'left' , borderRadius: '20px 20px' , minHeight: '600px' , maxHeight: '600px'}} className='text-center'>
+                <Container style={{float: 'left' , borderRadius: '20px 20px' , minHeight: '680px' , maxHeight: '680px'}} className='text-center'>
                     <Row>
-                        <Container style={{backgroundColor: 'lightyellow' , maxHeight: '300px' , minHeight: '300px', borderRadius: '20px 20px'}}>
-                            <Row className='my-4 mt-5'>
-                                <Col className='fw-bold'>{user.userName}</Col>
+                        <Container style={{backgroundColor: 'lightyellow' , maxHeight: '350px' , minHeight: '350px', borderRadius: '20px 20px'}}>
+                            <Row className='mt-2 my-2'>
+                                <Col className='fw-bold'>{user.userName}`s Introduce</Col>
                             </Row>
-                            <Row className='my-3 mx-2'>
-                                <div style={{borderColor: 'black', borderWidth: '1px' , borderStyle: 'solid', borderRadius: '10px 10px' , height: '200px'}}>{user.userIntroduce}</div>
+                            <Row className='mx-2'>
+                                <div style={{borderColor: 'black', borderWidth: '1px' , borderStyle: 'solid', borderRadius: '10px 10px' , height: '230px'}}>{user.userIntroduce}</div>
                             </Row>
                         </Container>
                     </Row>
@@ -77,7 +76,7 @@ function UserInfo(props){
 
 
                 <Col md={4}>
-                <Container style={{backgroundColor:'lightgreen' , float:'right' , borderRadius: '20px 20px', minHeight: '620px' , maxHeight: '620px'}}>
+                <Container style={{backgroundColor:'lightgreen' , float:'right' , borderRadius: '20px 20px', minHeight: '670px' , maxHeight: '670px'}}>
                     <Row style={{marginTop: '80px'}}>
                     <Infolist id="ID" data={user.userId}></Infolist>
                     <Infolist id="Name" data={user.userName}></Infolist>
@@ -89,9 +88,9 @@ function UserInfo(props){
                 </Container>
                 </Col>
             </Row>
-            <Row className='text-center'>
+            <Row className='text-center justify-content-center'>
                         <Col>
-                        <Button variant='secondary' size="sm" className='my-2' href={`/mypage/modify/${userId}`}>수정하기</Button>
+                        <Button variant='secondary' size="sm" className='my-2 mx-2' href={`/mypage/modify/${userId}`}>수정하기</Button>
                         </Col>
             </Row>
         </Container>

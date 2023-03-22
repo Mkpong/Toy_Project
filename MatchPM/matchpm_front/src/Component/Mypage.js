@@ -7,7 +7,7 @@ import UserInfo from './UserInfo';
 import UserProject from './UserProject';
 import Button from 'react-bootstrap/Button'
 
-function Mypage () {
+function Mypage (props) {
 
     const {userid} = useParams();
     const [view , setView] = useState(true);
@@ -15,16 +15,37 @@ function Mypage () {
 
     return (
         <>
-        <Container style={{maxWidth: '1200px'}} className='my-3'>
-            <Row className='text-center' >
-                <Col><Button variant="info" onClick={() => {setView(true)}}>개인정보</Button></Col>
-                <Col><Button variant="info" onClick={() => {setView(false)}}>프로젝트 내역</Button></Col>
+        <Container style={{maxWidth: '1300px' , minWidth: '1300px'}} className='mt-3'>
+            <Row>
+            <Col lg={2}>
+                <Container style={{minHeight:'680px' , maxHeight:'680px' , backgroundColor: 'lightyellow' , borderRadius: '20px 20px'}}>    
+                    <Row className='text-center'>
+                        <Col className='mt-3 fw-bold'>User Page</Col>
+                    </Row>
+                    <Row className='text-center'>
+                        <Col className='mt-3'>
+                            <Button variant='light' style={{width:'170px'}} onClick={() => setView(true)}>
+                                My Info
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row className='text-center'>
+                        <Col className='mt-3'>
+                            <Button variant='light' style={{width:'170px'}} onClick={() => setView(false)}>
+                            My Project
+                            </Button>
+                        </Col>
+                    </Row>
+                </Container>
+                </Col>
+            <Col>
+                {view ?
+                (<UserInfo id={userid} />) : 
+                (<UserProject />)
+                }
+                </Col>
             </Row>
         </Container>
-        {view ?
-        (<UserInfo id={userid}/>) : 
-        (<UserProject />)
-        }
         </>
     );
 }

@@ -17,6 +17,7 @@ function NavBar(){
   const [ch , setch] = useState(false);
   const [userId , setUserId] = useState("");
   const [userrole , setUserrole] = useState("");
+  const [admin , setAdmin] = useState(false);
 
 
   const logout = () => {
@@ -32,11 +33,15 @@ function NavBar(){
       const response2 = await axios.get('/api/siteuser/getauthentication')
       setUserId(response.data);
       setUserrole(response2.data[0]);
+      console.log(response2.data);
   
       if(response.data === ""){
         setch(false);
       }
       else{
+        if(response2.data.includes("ROLE_ADMIN")){
+          setAdmin(true);
+        }else setAdmin(false);
         setch(true);
       }
     }
@@ -44,7 +49,7 @@ function NavBar(){
   } , [])
 
     return(
-      <Container fluid style={{maxWidth: '1600px' , borderRadius: '50px 50px'}}>
+      <Container fluid style={{maxWidth: '1300px' , borderRadius: '50px 50px'}}>
         <Navbar bg="light" expand="lg" style={{borderRadius: '20px 20px'}}>
           <Navbar.Brand href="/" className='mx-2'>Mkpong</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -56,7 +61,7 @@ function NavBar(){
             >
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/user">Project</Nav.Link>
-              <Nav.Link href="/adminpage">Admin</Nav.Link>
+              {admin && <Nav.Link href="/adminpage">Admin</Nav.Link>}
             </Nav>
               {ch ? (
                       <div>

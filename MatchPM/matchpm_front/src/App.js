@@ -7,10 +7,11 @@ import Login from './Component/Login';
 import Register from './Component/Register';
 import MyPage from './Component/Mypage';
 import Modify from './Component/Modify';
+import Admin from './Component/Admin';
 
 function App() {
   return (
-    <div>
+    <div style={{backgroundColor: 'gray'}}>
       <NavBar></NavBar>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/mypage/:userid" element={<MyPage />} />
         <Route path="/mypage/modify/:userid" element={<Modify />} />
+        <Route path="/adminpage" element={<Admin />} />
       </Routes>
     </div>
   );

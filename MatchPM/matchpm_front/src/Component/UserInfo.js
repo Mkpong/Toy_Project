@@ -36,8 +36,8 @@ function UserInfo(props){
     } , [])
 
     return (
-        <>
-        <Container style={{maxWidth: '1200px'}}>
+        <div style={{backgroundColor: 'gray'}}>
+        <Container style={{maxWidth: '1200px' , backgroundColor: 'gray'}}>
             <Row className='text-center'>
                 <Col style={{fontSize:'30px'}} className='fw-bold my-2'>User Info</Col>
             </Row>
@@ -95,7 +95,7 @@ function UserInfo(props){
                         </Col>
             </Row>
         </Container>
-        </>
+        </div>
 
     );
 }

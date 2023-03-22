@@ -55,8 +55,8 @@ function NavBar(){
               navbarScroll
             >
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/user">user</Nav.Link>
-              <Nav.Link href="/team">team</Nav.Link>
+              <Nav.Link href="/user">Project</Nav.Link>
+              <Nav.Link href="/adminpage">Admin</Nav.Link>
             </Nav>
               {ch ? (
                       <div>

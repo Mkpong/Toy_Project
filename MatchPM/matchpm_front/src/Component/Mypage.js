@@ -15,8 +15,8 @@ function Mypage () {
 
     return (
         <>
-        <Container style={{maxWidth: '500px'}} className='my-3'>
-            <Row className='text-center'>
+        <Container style={{maxWidth: '1200px'}} className='my-3'>
+            <Row className='text-center' >
                 <Col><Button variant="info" onClick={() => {setView(true)}}>개인정보</Button></Col>
                 <Col><Button variant="info" onClick={() => {setView(false)}}>프로젝트 내역</Button></Col>
             </Row>

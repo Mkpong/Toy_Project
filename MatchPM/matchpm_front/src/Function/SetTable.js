@@ -1,7 +1,12 @@
 import React, { useMemo } from 'react';
 import { useTable } from 'react-table';
-import { TableRow, TableCell, Table, TableHead, TableBody, withStyles, Paper } from '@mui/material';
-import Container from 'react-bootstrap/Container';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 
 function SetTable(props) {
@@ -15,14 +20,12 @@ function SetTable(props) {
 
  
     return (
-
-        <Container style={{marginLeft: '10px'}}>
-        <Table {...getTableProps()}>
-            <TableHead>
+        <Table {...getTableProps()} size="small">
+            <TableHead style={{backgroundColor: 'black'}}>
                 {headerGroups.map((headerGroup) => (
                     <TableRow {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map((column) => (
-                            <TableCell {...column.getHeaderProps()}>
+                            <TableCell {...column.getHeaderProps()} align="center" style={{color: 'white'}}>
                                 {column.render("Header")}
                             </TableCell>
                         ))}
@@ -33,23 +36,22 @@ function SetTable(props) {
                 {rows.map((row) => {
                     prepareRow(row);
                     return(
-                        <tr {...row.getRowProps()}>
+                        <TableRow {...row.getRowProps()}>
                             {row.cells.map((cell) => {
                                 if(cell.column.Header === props.linkdata){
                                     return (
-                                        <td {...cell.getCellProps()}><a href={`${props.pathdata}/${cell.value}`}>{cell.render("Cell")}</a></td>
+                                        <TableCell {...cell.getCellProps()}  align="center"><a href={`${props.pathdata}/${cell.value}`}>{cell.render("Cell")}</a></TableCell>
                                     )
                                 }
                                 return(
-                                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                    <TableCell {...cell.getCellProps()} align="center">{cell.render("Cell")}</TableCell>
                                 )
                             })}
-                        </tr>
+                        </TableRow>
                     )
                 })}
             </TableBody>
         </Table>
-        </Container>
     );
 }
 

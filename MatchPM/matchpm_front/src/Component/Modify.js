@@ -173,7 +173,6 @@ function Modify() {
             ...user,
             userSkill: userSkillList
         })
-        console.log(userSkillList)
     }
 
     let skills = skilllist.map((skill) => (

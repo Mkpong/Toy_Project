@@ -17,13 +17,13 @@ function Admin() {
                         <Col className='mt-3 fw-bold'>Admin Page</Col>
                     </Row>
                     <Row className='text-center'>
-                        <Col className='mt-3'><Button variant='light' style={{width:'170px'}} onClick={() => setChannel("0")}>User List</Button></Col>
+                        <Col className='mt-3'><Button variant='light' style={{width:'160px' , fontSize: '15px'}} onClick={() => setChannel("0")}>User List</Button></Col>
                     </Row>
                     <Row className='text-center'>
-                        <Col className='mt-3'><Button variant='light' style={{width:'170px'}} onClick={() => setChannel("1")}>Completed Project</Button></Col>
+                        <Col className='mt-3'><Button variant='light' style={{width:'160px', fontSize: '15px'}} onClick={() => setChannel("1")}>Completed Project</Button></Col>
                     </Row>
                     <Row className='text-center'>
-                        <Col className='mt-3'><Button variant='light' style={{width:'170px'}} onClick={() => setChannel("2")}>Ongoing Project</Button></Col>
+                        <Col className='mt-3'><Button variant='light' style={{width:'160px', fontSize: '15px'}} onClick={() => setChannel("2")}>Ongoing Project</Button></Col>
                     </Row>
                 </Container>
             </Col>

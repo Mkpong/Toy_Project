@@ -47,5 +47,4 @@ public class SiteUser {
     @Column(name = "pmscore")
     private int userPmscore;
 
-
 }

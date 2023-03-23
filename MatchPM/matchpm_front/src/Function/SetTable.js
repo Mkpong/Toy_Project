@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTable } from 'react-table';
 import { TableRow, TableCell, Table, TableHead, TableBody, withStyles, Paper } from '@mui/material';
+import Container from 'react-bootstrap/Container';
 
 
 function SetTable(props) {
@@ -15,7 +16,7 @@ function SetTable(props) {
  
     return (
 
-        <Paper>
+        <Container style={{marginLeft: '10px'}}>
         <Table {...getTableProps()}>
             <TableHead>
                 {headerGroups.map((headerGroup) => (
@@ -48,7 +49,7 @@ function SetTable(props) {
                 })}
             </TableBody>
         </Table>
-        </Paper>
+        </Container>
     );
 }
 

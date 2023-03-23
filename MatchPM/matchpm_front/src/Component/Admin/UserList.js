@@ -30,12 +30,12 @@ function UserList() {
     ] , [])
 
     return (
-        <Container className='mt-1' style={{backgroundColor: 'white' ,maxWidth: '1000px', minHeight: '675px' , maxHeight: '675px'}}>
+        <Container className='mt-1' style={{backgroundColor: 'white' ,maxWidth: '1000px', minHeight: '675px' , maxHeight: '675px' , marginLeft: '0px'}}>
             <Row className='mx-2 fw-bold'>
                 *User List*
             </Row>
             <Row className='mx-2'>
-            {userlist && <SetTable linkdata="UserId" data={userlist} columns={columns} pathdata="/adminpage"/>}
+            {userlist && <SetTable linkdata="UserId" data={userlist} columns={columns} pathdata="/adminpage/userdetail"/>}
             </Row>
         </Container>
     );

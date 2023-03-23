@@ -33,7 +33,6 @@ function NavBar(){
       const response2 = await axios.get('/api/siteuser/getauthentication')
       setUserId(response.data);
       setUserrole(response2.data[0]);
-      console.log(response2.data);
   
       if(response.data === ""){
         setch(false);

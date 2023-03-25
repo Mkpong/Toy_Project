@@ -60,6 +60,7 @@ function NavBar(){
             >
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/project">Project</Nav.Link>
+              <Nav.Link href="/board">Board</Nav.Link>
               {admin && <Nav.Link href="/adminpage">Admin</Nav.Link>}
             </Nav>
               {ch ? (

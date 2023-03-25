@@ -11,6 +11,8 @@ import Modify from './Component/Modify';
 import Admin from './Component/Admin/Admin';
 import { Container } from 'react-bootstrap';
 import Userdetail from './Component/Admin/Userdetail';
+import BoardWrtie from './Component/Admin/BoardWrite';
+import Board from './Component/Board/Board';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="/mypage/modify/:userid" element={<Modify />} />
         <Route path="/adminpage" element={<Admin />} />
         <Route path="/adminpage/userdetail/:userid" element={<Userdetail />} />
+        <Route path="/adminpage/board/write" element={<BoardWrtie />} />
+        <Route path="/board" element={<Board />} />
       </Routes>
     </Container>
   );

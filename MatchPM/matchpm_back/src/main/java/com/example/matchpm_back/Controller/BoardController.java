@@ -1,6 +1,7 @@
 package com.example.matchpm_back.Controller;
 
 import com.example.matchpm_back.Entity.Board;
+import com.example.matchpm_back.Entity.Post;
 import com.example.matchpm_back.Service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class BoardController {
@@ -22,9 +24,14 @@ public class BoardController {
         return boardService.getBoardlist();
     } // 모든 board를 list로 반환
 
-    @PostMapping("/api/board/create")
+    @PostMapping("/api/board/create") //Board 생성 (이때 Board에는 boardname밖에 없음)
     public String createBoard(@RequestBody Board board){
         return boardService.createBoard(board);
     } //Board를 받아서 DB에새로운 board 생성
+
+    @PostMapping("/api/post/getposts") //boardName의 게시판에서 게시글 가져오기
+    public List<Post> getPosts(@RequestBody Map<String, String> boardName){
+        return boardService.getPosts(boardName.get("boardName"));
+    }
 
 }

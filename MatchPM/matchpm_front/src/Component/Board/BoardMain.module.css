@@ -1,0 +1,19 @@
+.row_1 {
+    text-align: center;
+}
+
+.col_1 {
+    background-color: white;
+    margin-top: 10px
+}
+
+.col_2 {
+    font-size: 30px;
+}
+
+.col_3{
+    border: solid 2px black;
+    min-height: 250px;
+    float: none;
+    margin: 0px auto;
+}

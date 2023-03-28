@@ -1,0 +1,17 @@
+.col_1 {
+    background-color: white;
+    margin-top: 10px;
+}
+
+.row_1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.row_2 {
+    text-align: end;
+}
+
+.row_3 {
+    margin-top: 10px;
+}

@@ -11,23 +11,30 @@ import Modify from './Component/Modify';
 import Admin from './Component/Admin/Admin';
 import { Container } from 'react-bootstrap';
 import Userdetail from './Component/Admin/Userdetail';
-import BoardWrtie from './Component/Admin/BoardWrite';
 import Board from './Component/Board/Board';
+import Post from './Component/Post/Post';
+import PostWrite from './Component/Post/PostWrite';
 
 function App() {
   return (
     <Container className='body' style={{maxWidth: '1300px'}}>
-      <NavBar></NavBar>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
         <Route path="/mypage/:userid" element={<MyPage />} />
         <Route path="/mypage/modify/:userid" element={<Modify />} />
+
         <Route path="/adminpage" element={<Admin />} />
         <Route path="/adminpage/userdetail/:userid" element={<Userdetail />} />
-        <Route path="/adminpage/board/write" element={<BoardWrtie />} />
+
         <Route path="/board" element={<Board />} />
+        <Route path="/board/:boardname" element={<Post />} />
+
+        <Route path="/post/write" element={<PostWrite />} />
       </Routes>
     </Container>
   );

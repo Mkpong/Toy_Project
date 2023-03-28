@@ -136,12 +136,10 @@ function Modify() {
 
 
     //수정하고 업데이트 된 정보 넘기기
-    const Modifycheck = () => {
+    const Modifycheck = async() => {
         console.log(user);
         if(checkName && checkYear && checkMonth && checkDay && checkSex && checkPhonenumber && checkEmail){
-            axios.post('/api/siteuser/modify' , user)
-            .then(response => console.log(response))
-            .catch(error => console.log(error))
+            const response = axios.post('/api/siteuser/modify' , user)
             navigate(`/mypage/${user.userId}`)
         }
         else{

@@ -3,8 +3,11 @@ import { Container, Row, ListGroup, Col, Button, Form } from 'react-bootstrap';
 import SetTable from '../../Function/SetTable';
 import { useMemo } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function BoardList(){
+
+    const navigate = useNavigate();
 
     const [boardlist , setBoardlist] = useState();
     const [writemode , setWritemode] = useState(false);
@@ -29,9 +32,13 @@ function BoardList(){
 
     useEffect(() => {
         axios.get('/api/board/boardlist')
-        .then(response => setBoardlist(response.data))
-        .catch(error => console.log(error))
-    } , [])
+        .then(response => {
+            setBoardlist(response.data)
+            console.log(response.data)
+        })
+    } , [writemode])
+
+
 
     const writemodeChange = async() => {
         if(writemode){
@@ -40,7 +47,6 @@ function BoardList(){
             }
             else{
                 const response = await axios.post('/api/board/create' , board)
-                console.log(response.data)
                 if(response.data === 'fail'){
                     alert("이미 존재하는 이름입니다!"); 
                 }
@@ -64,7 +70,7 @@ function BoardList(){
 
 
     return(
-    <Container className='mt-1' style={{backgroundColor: 'white' ,maxWidth: '1000px', minHeight: '675px' , maxHeight: '675px' , marginLeft: '0px'}}>
+    <Container className='mt-1' style={{backgroundColor: 'white' ,maxWidth: '1000px', minHeight: '675px' , marginLeft: '0px'}}>
         <Row className='mx-2 fw-bold'>
             <Col className='mt-3'>
                 *Board List*
@@ -82,17 +88,20 @@ function BoardList(){
                     </Col>
                     </>
                 ) : (
-                <Col className='text-end mt-3' lg={2}>
-                <Button variant='primary' onClick={writemodeChange}>Add Board</Button>
-                </Col>
+                    <Col className='text-end mt-3' lg={2}>
+                    <Button variant='primary' onClick={writemodeChange}>Add Board</Button>
+                    </Col>
                 )}
         </Row>
         <Row className='mx-2 my-2'>
-        {boardlist && <SetTable linkdata="BoardName" data={boardlist} columns={columns} pathdata="/adminpage/board"/>}
+            {boardlist && <SetTable linkdata="BoardName" data={boardlist} columns={columns} pathdata="/adminpage/board"/>}
         </Row>
     </Container>
     )
+    
 
 }
+
+
 
 export default BoardList;

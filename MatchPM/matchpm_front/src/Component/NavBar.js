@@ -44,6 +44,7 @@ function NavBar(){
         setch(true);
       }
     }
+
     checklogin();
   } , [])
 

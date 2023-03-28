@@ -10,3 +10,7 @@ module.exports = function(app) {
   );
 
 };
+
+//3000
+//8080
+//cors

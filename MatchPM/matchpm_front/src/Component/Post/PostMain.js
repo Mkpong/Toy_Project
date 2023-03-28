@@ -39,7 +39,7 @@ function PostMain(props) {
                     <Col><Button size='sm' href="/post/write">게시글 작성</Button></Col>
                 </Row>
                 <Row className={styles.row_3}>
-                    {postlist && <SetTable linkdata="PostTitle" data={postlist} columns={columns} pathdata="/post"/>}
+                    {postlist && <SetTable linkdata="Index" data={postlist} columns={columns} pathdata="/post/detail"/>}
                 </Row>
             </Container>
         </Col>

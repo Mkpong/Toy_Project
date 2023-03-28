@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import {Routes, Route, Link} from "react-router-dom";
@@ -14,8 +14,15 @@ import Userdetail from './Component/Admin/Userdetail';
 import Board from './Component/Board/Board';
 import Post from './Component/Post/Post';
 import PostWrite from './Component/Post/PostWrite';
+import Postdetail from './Component/Post/Postdetail';
+
 
 function App() {
+
+
+
+  
+
   return (
     <Container className='body' style={{maxWidth: '1300px'}}>
       <NavBar />
@@ -35,6 +42,7 @@ function App() {
         <Route path="/board/:boardname" element={<Post />} />
 
         <Route path="/post/write" element={<PostWrite />} />
+        <Route path="/post/detail/:postid" element={<Postdetail />}/>
       </Routes>
     </Container>
   );

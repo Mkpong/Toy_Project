@@ -7,10 +7,13 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom';
 import { NavDropdown } from 'react-bootstrap';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown'
+import allActions from '../Actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 function NavBar(){
+
+  const currentUser = useSelector(state => state.currentUser);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -24,6 +27,7 @@ function NavBar(){
     axios.get('/api/logout')
     .catch(error => console.log(error))
     setch(false);
+    dispatch(allActions.userAction.logoutUser());
     navigate("/")
   }
 
@@ -33,6 +37,7 @@ function NavBar(){
       const response2 = await axios.get('/api/siteuser/getauthentication')
       setUserId(response.data);
       setUserrole(response2.data[0]);
+
   
       if(response.data === ""){
         setch(false);
@@ -44,9 +49,10 @@ function NavBar(){
         setch(true);
       }
     }
-
     checklogin();
-  } , [])
+    
+
+  } , [currentUser])
 
     return(
       <Container fluid style={{maxWidth: '1300px' , borderRadius: '50px 50px'}}>
@@ -64,7 +70,7 @@ function NavBar(){
               <Nav.Link href="/board">Board</Nav.Link>
               {admin && <Nav.Link href="/adminpage">Admin</Nav.Link>}
             </Nav>
-              {ch ? (
+              {currentUser.login ? (
                       <div>
                       <Nav>
                       <Navbar.Text>

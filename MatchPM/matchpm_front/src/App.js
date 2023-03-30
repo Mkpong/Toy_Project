@@ -19,8 +19,6 @@ import Postdetail from './Component/Post/Postdetail';
 
 function App() {
 
-
-
   
 
   return (

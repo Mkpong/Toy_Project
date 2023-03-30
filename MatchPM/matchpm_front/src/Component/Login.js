@@ -9,8 +9,12 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs'
 import Alert from 'react-bootstrap/Alert'
+import { useDispatch, useSelector } from 'react-redux';
+import allActions from '../Actions';
 
 function Login() {
+  const currentUser = useSelector(state => state.currentUser);
+  const dispatch = useDispatch();
 
   const [check , setCheck] = useState(true);
 
@@ -41,6 +45,8 @@ function Login() {
       setCheck(false);
     }else{
       navigate("/");
+      const response2 = await axios.post('/api/siteuser/finduser' , {userId: logindata.username})
+      dispatch(allActions.userAction.loginUser("SUCCESS"));
     }
   }
 

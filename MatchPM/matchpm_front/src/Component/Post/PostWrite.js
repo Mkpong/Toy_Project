@@ -4,10 +4,12 @@ import BoardLeftBar from '../Board/BoardLeftBar';
 import styles from './PostWrite.module.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function PostWrite() {
 
     const navigate = useNavigate();
+    const currentUser = useSelector(state => state.currentUser);
 
     const [boardlist , setBoardlist] = useState();
     const [post , setPost] = useState();
@@ -16,12 +18,20 @@ function PostWrite() {
         axios.get('/api/board/boardlist')
         .then(response => setBoardlist(response.data))
         .catch(error => console.log(error));
+
+        console.log(currentUser.user)
+
+        setPost({
+            ...post,
+            userId: currentUser.user
+        })
     } , [])
 
     const addPost = () => {
-        const response = axios.post("/api/post/write" , post)
-
-        navigate(`/board/${post.boardName}`);
+        axios.post("/api/post/write" , post)
+        .then(response => {
+            navigate(`/board/${post.boardName}`)
+        })
     }
 
     const onChange = (e) => {

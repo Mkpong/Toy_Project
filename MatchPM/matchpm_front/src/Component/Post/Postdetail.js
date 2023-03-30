@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import BoardLeftBar from '../Board/BoardLeftBar';
-import { Container, Row, Col, Table } from 'react-bootstrap';
+import { Container, Row, Col, Table, Button } from 'react-bootstrap';
 import styles from './Postdetail.module.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function Postdetail() {
@@ -10,13 +10,20 @@ function Postdetail() {
     const postId = postid;
     const [post, setPost] = useState();
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         axios.get(`/api/post/getpost/${postId}`)
         .then(response => {
-            setPost(response.data)}
-            )
+            setPost(response.data)
+        })
         .catch(error => console.log(error));
     } , [])
+
+    const postDelete = () => {
+        axios.get(`/api/post/delete/${postId}`)
+        .then(navigate(`/board/${post.board.boardName}`))
+    }
 
     return(
         <>
@@ -27,6 +34,11 @@ function Postdetail() {
                     <Container className={styles.container_1}>
                         <Row className={styles.row_2}>
                             <Col className={styles.col_2}>Post Details</Col>
+                        </Row>
+                        <Row className={styles.row_3}>
+                            <Col>
+                            <Button variant='primary' onClick={postDelete}>삭제</Button>
+                            </Col>
                         </Row>
                         {post && <Postview post={post}/>}
                     </Container>
@@ -49,13 +61,13 @@ const Postview = (props) => {
                         <th>글번호</th>
                         <td>{post.id}</td>
                         <th>작성일시</th>
-                        <td>2023-04-24 19:30:21</td>
+                        <td>{post.postTime}</td>
                         <th>게시판</th>
                         <td>{post.board.boardName}</td>
                     </tr>
                     <tr>
                         <th>작성자</th>
-                        <td colSpan={5}>홍길동</td>
+                        <td colSpan={5}>{post.siteUser.userId}</td>
                     </tr>
                 </tbody>
             </Table>

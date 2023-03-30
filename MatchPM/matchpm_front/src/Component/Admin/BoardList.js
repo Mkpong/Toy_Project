@@ -34,7 +34,6 @@ function BoardList(){
         axios.get('/api/board/boardlist')
         .then(response => {
             setBoardlist(response.data)
-            console.log(response.data)
         })
     } , [writemode])
 
@@ -89,7 +88,7 @@ function BoardList(){
                     </>
                 ) : (
                     <Col className='text-end mt-3' lg={2}>
-                    <Button variant='primary' onClick={writemodeChange}>Add Board</Button>
+                        <Button variant='primary' onClick={writemodeChange}>Add Board</Button>
                     </Col>
                 )}
         </Row>

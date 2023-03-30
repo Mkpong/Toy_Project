@@ -8,6 +8,7 @@ function BoardRightBar() {
             <Container>
                 <Row>
                     RightSideBar
+                    
                 </Row>
             </Container>
         </Col>

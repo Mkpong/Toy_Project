@@ -45,7 +45,6 @@ public class SiteUserController {
 
     @PostMapping("/api/siteuser/finduser")
     public SiteUser finduser(@RequestBody Map<String, String> requestBody){
-        System.out.println(requestBody.get("userId"));
         return siteUserService.finduser(requestBody.get("userId"));
     }
 

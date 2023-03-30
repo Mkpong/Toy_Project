@@ -6,13 +6,20 @@ import Row from 'react-bootstrap/Row';
 import NavBar from './NavBar';
 
 function Home() {
+
+    const onClick = () => {
+
+    }
+
+
+
     return (
         <>
-        <Container style={{maxWidth: '1200px' , backgroundColor: 'lightblue'}}>
-            <Row className='justify-content-center'>
-                HOME!
-            </Row>
-        </Container>
+            <Container style={{maxWidth: '1200px' , backgroundColor: 'lightblue'}}>
+                <Row className='justify-content-center'>
+                    <Button onClick={onClick}>Check</Button>
+                </Row>
+            </Container>
         </>
     );
 }

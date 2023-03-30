@@ -1,7 +1,11 @@
 package com.example.matchpm_back.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -46,5 +50,9 @@ public class SiteUser {
 
     @Column(name = "pmscore")
     private int userPmscore;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "siteUser")
+    private List<Post> posts = new ArrayList<>();
 
 }

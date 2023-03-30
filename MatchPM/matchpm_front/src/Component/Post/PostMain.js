@@ -1,31 +1,48 @@
 import React, {useEffect, useState} from 'react';
 import styles from './PostMain.module.css';
-import {Container, Row, Col, Button} from 'react-bootstrap';
+import {Container, Row, Col, Button, Form} from 'react-bootstrap';
 import { useMemo } from 'react';
 import axios from 'axios';
 import SetTable from '../../Function/SetTable';
 import { useLocation } from 'react-router-dom';
 
+
+
 function PostMain(props) {
     const boardName = props.boardname;
 
     const [postlist , setPostlist] = useState();
+    const [page , setPage] = useState(0);
+    const [totalPages , setTotalPages] = useState(0);
+    const [totalElements , setTotalElements] = useState(0);
+    const [keyword , setKeyword] = useState("");
     
-
     useEffect(() => {
-        axios.post('/api/post/getposts' , {boardName})
-        .then(response => setPostlist(response.data))
+        getPost();
+    } , [page])
+
+    const getPost = () => {
+        axios.post(`/api/post/getposts?page=${page}&keyword=${keyword}` , {boardName})
+        .then(response => {
+            setPostlist(response.data.content)
+            setTotalPages(response.data.totalPages);
+            setTotalElements(response.data.totalElements);
+        })
         .catch(error => console.log(error))
-    } , [])
+    }
 
     const columns = useMemo(() => [
         {
             accessor: 'id',
-            Header: 'Index',
+            Header: '글번호',
+        },
+        {
+            accessor: 'siteUser.userId',
+            Header: '작성자'
         },
         {
             accessor: 'postTitle',
-            Header: 'PostTitle',
+            Header: '제목',
         },
     ] , [])
 
@@ -38,12 +55,62 @@ function PostMain(props) {
                 <Row className={styles.row_2}>
                     <Col><Button size='sm' href="/post/write">게시글 작성</Button></Col>
                 </Row>
-                <Row className={styles.row_3}>
-                    {postlist && <SetTable linkdata="Index" data={postlist} columns={columns} pathdata="/post/detail"/>}
-                </Row>
+                {totalElements !== 0 ? (
+                    <Row className={styles.row_3}>
+                        {postlist && <SetTable linkdata="글번호" data={postlist} columns={columns} pathdata="/post/detail"/>}
+                    </Row>) : (
+                    <Row className={styles.row_5}>
+                        <Col className={styles.col_2}>게시글이 존재하지 않습니다.</Col>
+                    </Row>
+                    )
+                }
+                {totalPages >= 2 &&
+                    <Row className={styles.row_4}>
+                        <Col lg={4} className={styles.col_3}>
+                            <Button hidden={page === 0}
+                                    onClick={() => setPage(page - 1)}
+                                    size='sm'
+                                    variant='dark'>←</Button>
+                        </Col>
+                        <Col lg={4} className={styles.col_4}>
+                            <span>Page {page + 1} of {totalPages}</span>
+                        </Col>
+                        <Col lg={4} className={styles.col_5}>
+                            <Button hidden={page === totalPages - 1}
+                                    onClick={() => setPage(page + 1)}
+                                    size='sm'
+                                    variant='dark'>→</Button>
+                        </Col>
+                    </Row>
+                }
+                {totalElements !== 0 && 
+                    <Row className={styles.row_6}>
+                        <Col className={styles.col_6} md={{span: 8 , offset:2}}>
+                            <Form.Select size='sm'
+                                        className='mx-2'
+                                        style={{width: '100px'}}>
+                                <option>제목</option>
+                                <option>내용</option>
+                                <option>작성자</option>
+                            </Form.Select>
+                            <Form.Control   size='sm'
+                                            placeholder='검색어를 입력해주세요'
+                                            onChange={(e) => setKeyword(e.target.value)}
+                            ></Form.Control>
+                            <Button size='sm'
+                                    className={styles.btn_1}
+                                    variant='info'
+                                    onClick={getPost}>검색</Button>
+                        </Col>
+                    </Row>
+                }
             </Container>
         </Col>
     )
+}
+
+const Bottom = () => {
+
 }
 
 export default PostMain;

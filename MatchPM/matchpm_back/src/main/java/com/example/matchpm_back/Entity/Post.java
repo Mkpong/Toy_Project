@@ -18,6 +18,13 @@ public class Post {
     @Column(name = "content")
     private String postContent;
 
+    @Column(name = "time")
+    private String postTime;
+
+    @ManyToOne
+    @JoinColumn(name="UserId")
+    private SiteUser siteUser;
+
     @ManyToOne
     @JoinColumn(name="BoardId")
     private Board board;

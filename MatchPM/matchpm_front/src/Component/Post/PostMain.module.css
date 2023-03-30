@@ -3,6 +3,23 @@
     margin-top: 10px;
 }
 
+.col_2 {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.col_3 {
+    text-align: end;
+}
+
+.col_5{
+    text-align: start;
+}
+
+.col_6 {
+    display: flex;
+}
+
 .row_1 {
     text-align: center;
     font-size: 30px;
@@ -14,4 +31,23 @@
 
 .row_3 {
     margin-top: 10px;
+}
+
+.row_4 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.row_5 {
+    text-align: center;
+}
+
+.row_6 {
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+.btn_1 {
+    width: 100px;
+    margin-left: 10px;
 }

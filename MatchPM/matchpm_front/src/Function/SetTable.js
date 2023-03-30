@@ -40,7 +40,9 @@ function SetTable(props) {
                             {row.cells.map((cell) => {
                                 if(cell.column.Header === props.linkdata){
                                     return (
-                                        <TableCell {...cell.getCellProps()}  align="center"><a href={`${props.pathdata}/${cell.value}`}>{cell.render("Cell")}</a></TableCell>
+                                        <TableCell {...cell.getCellProps()}  align="center">
+                                            <a href={`${props.pathdata}/${cell.value}`} style={{textDecorationLine: 'none'}}>{cell.render("Cell")}</a>
+                                        </TableCell>
                                     )
                                 }
                                 return(

@@ -139,7 +139,7 @@ function Modify() {
     const Modifycheck = async() => {
         console.log(user);
         if(checkName && checkYear && checkMonth && checkDay && checkSex && checkPhonenumber && checkEmail){
-            const response = axios.post('/api/siteuser/modify' , user)
+            const response = await axios.post('/api/siteuser/modify' , user)
             navigate(`/mypage/${user.userId}`)
         }
         else{

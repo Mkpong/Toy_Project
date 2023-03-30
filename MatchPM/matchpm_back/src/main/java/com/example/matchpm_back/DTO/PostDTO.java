@@ -14,6 +14,7 @@ public class PostDTO {
     private String postTitle;
     private String postContent;
     private String boardName;
+    private String userId;
 
 
 }

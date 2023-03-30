@@ -3,9 +3,12 @@ package com.example.matchpm_back.Service;
 import com.example.matchpm_back.Entity.Board;
 import com.example.matchpm_back.Entity.Post;
 import com.example.matchpm_back.Repository.BoardRepository;
+import com.example.matchpm_back.Repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +17,9 @@ public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private PostRepository postRepository;
 
     public List<Board> getBoardlist(){
         return boardRepository.findAll();
@@ -29,9 +35,12 @@ public class BoardService {
         }
     } //boardname이 중복되면 board생성 fail
 
-    public List<Post> getPosts(String boardName){
-        Board board = boardRepository.findByBoardName(boardName).get();
-        return board.getPosts();
+    public Page<Post> getPosts(String boardName , int page){
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(page, 10 ,Sort.by(sorts));
+        int boardId = boardRepository.findByBoardName(boardName).get().getId();
+        return postRepository.findAllByBoardId(boardId, pageable);
     }
 
 

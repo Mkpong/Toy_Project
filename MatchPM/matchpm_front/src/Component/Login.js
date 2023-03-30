@@ -46,7 +46,7 @@ function Login() {
     }else{
       navigate("/");
       const response2 = await axios.post('/api/siteuser/finduser' , {userId: logindata.username})
-      dispatch(allActions.userAction.loginUser("SUCCESS"));
+      dispatch(allActions.userAction.loginUser(logindata.username));
     }
   }
 

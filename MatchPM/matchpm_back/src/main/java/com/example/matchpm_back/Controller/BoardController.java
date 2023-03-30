@@ -4,10 +4,8 @@ import com.example.matchpm_back.Entity.Board;
 import com.example.matchpm_back.Entity.Post;
 import com.example.matchpm_back.Service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -30,8 +28,9 @@ public class BoardController {
     } //Board를 받아서 DB에새로운 board 생성
 
     @PostMapping("/api/post/getposts") //boardName의 게시판에서 게시글 가져오기
-    public List<Post> getPosts(@RequestBody Map<String, String> boardName){
-        return boardService.getPosts(boardName.get("boardName"));
+    public Page<Post> getPosts(@RequestBody Map<String, String> boardName ,
+                               @RequestParam(value="page" , defaultValue="0") int page ){
+        return boardService.getPosts(boardName.get("boardName") , page);
     }
 
 }

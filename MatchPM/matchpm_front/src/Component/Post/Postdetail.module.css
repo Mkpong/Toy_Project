@@ -1,10 +1,15 @@
 .container_main {
-    min-width: 1250px;
+    min-width: 1000px;
     max-width: 1250px;
 }
 
 .row_1 {
     min-height: 500px;
+}
+
+.row_3 {
+    text-align: end;
+    margin-bottom: 10px;
 }
 
 .col_1 {

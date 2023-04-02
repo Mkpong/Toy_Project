@@ -16,13 +16,14 @@ function PostMain(props) {
     const [totalPages , setTotalPages] = useState(0);
     const [totalElements , setTotalElements] = useState(0);
     const [keyword , setKeyword] = useState("");
+    const [key ,setKey] = useState("all");
     
     useEffect(() => {
         getPost();
     } , [page])
 
     const getPost = () => {
-        axios.post(`/api/post/getposts?page=${page}&keyword=${keyword}` , {boardName})
+        axios.post(`/api/post/getposts?page=${page}&keyword=${keyword}&key=${key}` , {boardName})
         .then(response => {
             setPostlist(response.data.content)
             setTotalPages(response.data.totalPages);
@@ -37,13 +38,17 @@ function PostMain(props) {
             Header: '글번호',
         },
         {
+            accessor: 'postTitle',
+            Header: '제목',
+        },
+        {
             accessor: 'siteUser.userId',
             Header: '작성자'
         },
         {
-            accessor: 'postTitle',
-            Header: '제목',
-        },
+            accessor: 'postLike',
+            Header: '추천'
+        }
     ] , [])
 
     return (
@@ -83,15 +88,15 @@ function PostMain(props) {
                         </Col>
                     </Row>
                 }
-                {totalElements !== 0 && 
                     <Row className={styles.row_6}>
                         <Col className={styles.col_6} md={{span: 8 , offset:2}}>
                             <Form.Select size='sm'
                                         className='mx-2'
+                                        onChange={(e) => setKey(e.target.value)}
                                         style={{width: '100px'}}>
-                                <option>제목</option>
-                                <option>내용</option>
-                                <option>작성자</option>
+                                <option value="all">전체</option>
+                                <option value="title">제목</option>
+                                <option value="content">내용</option>
                             </Form.Select>
                             <Form.Control   size='sm'
                                             placeholder='검색어를 입력해주세요'
@@ -103,7 +108,6 @@ function PostMain(props) {
                                     onClick={getPost}>검색</Button>
                         </Col>
                     </Row>
-                }
             </Container>
         </Col>
     )

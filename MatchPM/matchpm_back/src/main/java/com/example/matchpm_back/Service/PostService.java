@@ -41,9 +41,10 @@ public class PostService {
         post.setBoard(board);
         post.setSiteUser(siteUser);
         post.setPostTime(formated);
+        post.setPostLike(0);
+        post.setPostDislike(0);
         //Board set
-        int size = board.getBoardSize();
-        board.setBoardSize(size+1);
+        board.setBoardSize(board.getBoardSize() + 1);
         //Save
         boardRepository.save(board);
         postRepository.save(post);
@@ -59,9 +60,27 @@ public class PostService {
         return postRepository.findById(id).get();
     }
 
-    public String deletePost(Integer id){
+    public String deletePost(Integer id , Integer boardId){
         postRepository.deleteById(id);
+        Board board = boardRepository.findById(boardId).get();
+        board.setBoardSize(board.getBoardSize() - 1);
+        boardRepository.save(board);
         return "SUCCESS";
+    }
+
+    public void updateLike(Integer id , String type){
+        Post post = postRepository.findById(id).get();
+        if(type.equals("like")) post.setPostLike(post.getPostLike()+1);
+        else post.setPostDislike(post.getPostDislike()+1);
+        postRepository.save(post);
+    }
+
+    public List<Post> bestPost() {
+        List<Post> allPost = postRepository.findAll(Sort.by(Sort.Direction.DESC , "postLike"));
+        if(allPost.size() <= 10) return allPost;
+        else{
+            return allPost.subList(0,10);
+        }
     }
 
 }

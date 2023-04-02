@@ -3,9 +3,9 @@ import { Container } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ListGroup , Form , Button} from 'react-bootstrap';
-import Infolist from '../Function/Infolist';
+import Infolist from '../../Function/Infolist';
 import axios from 'axios';
-import Modify from './Modify';
+import Modify from '../Modify';
 import { useNavigate } from 'react-router-dom';
 
 function UserInfo(props){

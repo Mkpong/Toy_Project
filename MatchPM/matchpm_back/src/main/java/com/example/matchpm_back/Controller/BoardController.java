@@ -29,8 +29,11 @@ public class BoardController {
 
     @PostMapping("/api/post/getposts") //boardName의 게시판에서 게시글 가져오기
     public Page<Post> getPosts(@RequestBody Map<String, String> boardName ,
-                               @RequestParam(value="page" , defaultValue="0") int page ){
-        return boardService.getPosts(boardName.get("boardName") , page);
+                               @RequestParam(value="page" , defaultValue="0") int page,
+                               @RequestParam(value="keyword" ,defaultValue = "") String keyword,
+                               @RequestParam(value="key" , defaultValue = "") String key){
+        System.out.println("key : " + key);
+        return boardService.getPosts(boardName.get("boardName") , page , keyword , key);
     }
 
 }

@@ -31,9 +31,20 @@ public class PostController {
     }
 
     @GetMapping("/api/post/delete/{id}")
-    public String deletePost(@PathVariable("id") Integer id){
-        return postService.deletePost(id);
+    public String deletePost(@PathVariable("id") Integer id,
+                             @RequestParam(value="boardId")Integer boardId){
+        return postService.deletePost(id , boardId);
     }
+
+    @GetMapping("/api/post/updatelike")
+    public void updateLike(@RequestParam(value = "id")int id , @RequestParam(value = "type")String type){
+        postService.updateLike(id, type);
+    }
+
+    @GetMapping("/api/post/bestpost")
+    public List<Post> bestPost() {
+        return postService.bestPost();
+    } //가장 많은 추천을 받은 상위 10개의 글을 불러온다.
 
 
 }

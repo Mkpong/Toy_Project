@@ -15,11 +15,27 @@ import Board from './Component/Board/Board';
 import Post from './Component/Post/Post';
 import PostWrite from './Component/Post/PostWrite';
 import Postdetail from './Component/Post/Postdetail';
-
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import allActions from './Actions';
+import BottomBar from './Component/BottomBar';
 
 function App() {
 
-  
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.user);
+
+  useEffect(() => {
+    axios.get('/api/siteuser/getid')
+    .then(response => {
+      if(response.data === ""){
+        dispatch(allActions.userAction.logoutUser());
+      }
+      else{
+        dispatch(allActions.userAction.loginUser(response.data));
+      }
+    })
+  } ,[])
 
   return (
     <Container className='body' style={{maxWidth: '1300px'}}>
@@ -42,6 +58,7 @@ function App() {
         <Route path="/post/write" element={<PostWrite />} />
         <Route path="/post/detail/:postid" element={<Postdetail />}/>
       </Routes>
+      <BottomBar />
     </Container>
   );
 }

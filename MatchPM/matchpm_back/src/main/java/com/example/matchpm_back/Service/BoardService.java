@@ -35,12 +35,20 @@ public class BoardService {
         }
     } //boardname이 중복되면 board생성 fail
 
-    public Page<Post> getPosts(String boardName , int page){
+    public Page<Post> getPosts(String boardName , int page, String keyword , String key){
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(page, 10 ,Sort.by(sorts));
         int boardId = boardRepository.findByBoardName(boardName).get().getId();
-        return postRepository.findAllByBoardId(boardId, pageable);
+        if(key.equals("title")){ //제목으로 찾기
+            return postRepository.findByBoardIdAndPostTitleContaining(boardId , pageable , keyword);
+        }
+        else if(key.equals("content")){
+            return postRepository.findByBoardIdAndPostContentContaining(boardId, pageable , keyword);
+        }
+        else {
+            return postRepository.findByBoardIdAndPostTitleContainingOrBoardIdAndPostContentContaining(boardId  , pageable , keyword , boardId, keyword);
+        }
     }
 
 

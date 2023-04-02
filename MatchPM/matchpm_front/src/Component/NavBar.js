@@ -55,7 +55,7 @@ function NavBar(){
   } , [currentUser])
 
     return(
-      <Container fluid style={{maxWidth: '1300px' , borderRadius: '50px 50px'}}>
+      <Container fluid style={{maxWidth: '1300px' , borderRadius: '50px 50px'}} className='mb-2'>
         <Navbar bg="light" expand="lg" style={{borderRadius: '20px 20px'}}>
           <Navbar.Brand href="/" className='mx-2'>Mkpong</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />

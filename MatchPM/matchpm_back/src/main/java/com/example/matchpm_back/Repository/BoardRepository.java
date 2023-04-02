@@ -15,4 +15,5 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     Optional<Board> findByBoardName(String boardName);
 
+
 }

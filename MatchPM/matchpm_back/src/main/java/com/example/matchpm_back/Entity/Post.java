@@ -2,6 +2,7 @@ package com.example.matchpm_back.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Data
@@ -17,6 +18,12 @@ public class Post {
 
     @Column(name = "content")
     private String postContent;
+
+    @Column(name = "likes")
+    private int postLike;
+
+    @Column(name = "dislikes")
+    private int postDislike;
 
     @Column(name = "time")
     private String postTime;

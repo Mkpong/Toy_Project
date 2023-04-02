@@ -28,10 +28,15 @@ function PostWrite() {
     } , [])
 
     const addPost = () => {
-        axios.post("/api/post/write" , post)
-        .then(response => {
-            navigate(`/board/${post.boardName}`)
-        })
+        if(!post.boardName || !post.postTitle || !post.postContent){
+            alert("모두 작성해주세요!")
+        }
+        else{
+            axios.post("/api/post/write" , post)
+            .then(response => {
+                navigate(`/board/${post.boardName}`)
+            })
+        }
     }
 
     const onChange = (e) => {

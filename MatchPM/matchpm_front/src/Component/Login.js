@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -15,8 +15,15 @@ import allActions from '../Actions';
 function Login() {
   const currentUser = useSelector(state => state.currentUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [check , setCheck] = useState(true);
+
+  useEffect(() => {
+    if(currentUser.login){
+      navigate("/")
+    }
+  } , [])
 
   const axiosConfig = {
     Headers:{
@@ -24,7 +31,6 @@ function Login() {
     }
   }
   
-  const navigate = useNavigate();
   const [logindata , setLogindata] = useState({
     username: "",
     password:""

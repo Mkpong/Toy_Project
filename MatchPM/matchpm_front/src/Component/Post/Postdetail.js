@@ -4,6 +4,7 @@ import { Container, Row, Col, Table, Button } from 'react-bootstrap';
 import styles from './Postdetail.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { valueToPercent } from '@mui/base';
 
 function Postdetail() {
     const {postid} = useParams();
@@ -16,12 +17,13 @@ function Postdetail() {
         axios.get(`/api/post/getpost/${postId}`)
         .then(response => {
             setPost(response.data)
+            console.log(response.data.board.id);
         })
         .catch(error => console.log(error));
     } , [])
 
     const postDelete = () => {
-        axios.get(`/api/post/delete/${postId}`)
+        axios.get(`/api/post/delete/${postId}?boardId=${post.board.id}`)
         .then(navigate(`/board/${post.board.boardName}`))
     }
 
@@ -51,8 +53,35 @@ function Postdetail() {
 }
 
 const Postview = (props) => {
-    const post = props.post
+    const [post, setPost] = useState();
+
+    useEffect(() => {
+        setPost(props.post);
+    } , [])
+
+    const onClick = (e) => {
+        const id = e.target.id;
+        axios.get(`/api/post/updatelike?id=${post.id}&type=${id}`)
+        .catch(error => console.log(error));
+        if(id === "like"){
+            const value = post.postLike;
+            setPost({
+                ...post,
+                postLike: value+1,
+            })
+        }
+        else{
+            const value = post.postDislike;
+            setPost({
+                ...post,
+                postDislike: value+1
+            })
+        }
+    } 
+
     return (
+        <>
+        {post &&
         <>
         <Row className={styles.row_view_01}>
             <Table striped bordered hover>
@@ -67,7 +96,9 @@ const Postview = (props) => {
                     </tr>
                     <tr>
                         <th>작성자</th>
-                        <td colSpan={5}>{post.siteUser.userId}</td>
+                        <td colSpan={3}>{post.siteUser.userId}</td>
+                        <th>좋아요</th>
+                        <td>{post.postLike}</td>
                     </tr>
                 </tbody>
             </Table>
@@ -76,9 +107,26 @@ const Postview = (props) => {
             <div className={styles.div_view_01}>{post.postTitle}</div>
             <div style={{borderBottom: 'solid 1px black' , marginTop: '5px'}}></div>
         </Row>
-        <Row>
+        <Row className={styles.row_view_03}>
             <div className={styles.div_view_02}>{post.postContent}</div>
         </Row>
+        <Row className={styles.row_view_04}>
+            <Col md={{span: 2, offset: 4}} className='text-end'>
+                <Button id="like" onClick={onClick} variant='light'>
+                    <img src="../../../image/like.png" style={{width: '23px' ,height: '23px'}}/>
+                    좋아요({post.postLike})
+                    </Button>
+            </Col>
+            <Col lg={2} className='text-start'>
+                <Button id="dislike" onClick={onClick} variant='light'>
+                    <img src="../../../image/dislike.png" style={{width: '23px' ,height: '23px'}}/>
+                    싫어요({post.postDislike})
+                </Button>
+            </Col>
+        </Row>
+        
+        </>
+        }
         </>
     );
 }

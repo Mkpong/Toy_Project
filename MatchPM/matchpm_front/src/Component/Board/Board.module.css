@@ -1,5 +1,4 @@
 .container_main {
-    min-width: 1000px;
     max-width: 1250px;
 }
 
@@ -7,6 +6,34 @@
     min-height: 500px;
     margin-left: 0px;
 }
+
+.row_2 {
+    margin-top: 10px;
+}
+
+.row_3 {
+    background-color: red;
+    color: white;
+    margin-top: 10px;
+    margin: 5px 10px;
+}
+
+.col_1 {
+    text-align: end;
+    
+}
+
+.col_2 {
+    text-align: center;
+}
+
+.a_1 {
+    text-decoration: none;
+    color: white;
+    margin: 100px 0px;
+}
+
+
 
 
 

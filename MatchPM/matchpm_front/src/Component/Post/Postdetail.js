@@ -5,11 +5,17 @@ import styles from './Postdetail.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { valueToPercent } from '@mui/base';
+import BoardTop from '../Board/BoardTop';
+import currentUser from '../../Reducers/userReducers';
+import { useSelector } from 'react-redux';
 
 function Postdetail() {
     const {postid} = useParams();
     const postId = postid;
     const [post, setPost] = useState();
+
+    const currentUser = useSelector(state => state.currentUser);
+
 
     const navigate = useNavigate();
 
@@ -17,7 +23,6 @@ function Postdetail() {
         axios.get(`/api/post/getpost/${postId}`)
         .then(response => {
             setPost(response.data)
-            console.log(response.data.board.id);
         })
         .catch(error => console.log(error));
     } , [])
@@ -30,20 +35,24 @@ function Postdetail() {
     return(
         <>
         <Container className={styles.container_main}>
+            <BoardTop />
             <Row className={styles.row_1}>
                 <BoardLeftBar />
                 <Col className={styles.col_1} lg={10}>
+                    {post &&
                     <Container className={styles.container_1}>
                         <Row className={styles.row_2}>
                             <Col className={styles.col_2}>Post Details</Col>
                         </Row>
+                        {(post.siteUser.userId===currentUser.user||currentUser.user==="admin") &&
                         <Row className={styles.row_3}>
                             <Col>
                             <Button variant='primary' onClick={postDelete}>삭제</Button>
                             </Col>
                         </Row>
+                        }
                         {post && <Postview post={post}/>}
-                    </Container>
+                    </Container>}
                 </Col>
             </Row>
         </Container>

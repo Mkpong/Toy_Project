@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, ListGroup, Col, Button, Form } from 'react-bootstrap';
-import SetTable from '../../Function/SetTable';
 import { useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import SetTable from '../../Function/SetTable';
 
 function BoardList(){
 

@@ -12,9 +12,6 @@ function Board() {
     const [boardlist , setBoardlist] = useState();
 
     useEffect(() => {
-        axios.get('/api/board/boardlist')
-        .then(response => setBoardlist(response.data))
-        .catch(error => console.log(error))
     } , [])
 
 
@@ -28,7 +25,7 @@ function Board() {
                 <a href='https://uzumarket.co.kr'><img src="image/ShoseAd.png" style={{width: '800px' , height: '100px'}} /></a>
                 </Col>
             </Row>
-            {boardlist && <BoardTop boardlist={boardlist}/>}
+            <BoardTop />
             <Row className={styles.row_1}>
                 <BoardLeftBar />
                 <BoardMain />

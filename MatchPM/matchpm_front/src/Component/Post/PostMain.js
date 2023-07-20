@@ -3,8 +3,8 @@ import styles from './PostMain.module.css';
 import {Container, Row, Col, Button, Form} from 'react-bootstrap';
 import { useMemo } from 'react';
 import axios from 'axios';
-import SetTable from '../../Function/SetTable';
 import { useLocation } from 'react-router-dom';
+import SetTable from '../../Function/SetTable';
 
 
 
@@ -25,7 +25,7 @@ function PostMain(props) {
     const getPost = () => {
         axios.post(`/api/post/getposts?page=${page}&keyword=${keyword}&key=${key}` , {boardName})
         .then(response => {
-            setPostlist(response.data.content)
+            setPostlist(response.data.content);
             setTotalPages(response.data.totalPages);
             setTotalElements(response.data.totalElements);
         })

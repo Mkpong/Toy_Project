@@ -23,6 +23,7 @@ function BoardMain() {
             {bestpost && <Bestpost bestpost={bestpost} />}
             </Col>
             <Col lg={5} className={styles.col_3}>
+            <div style={{borderBottom: 'solid 1px black'}}>사람을 구합니다!</div>
             </Col>
         </Row>
         </Container>

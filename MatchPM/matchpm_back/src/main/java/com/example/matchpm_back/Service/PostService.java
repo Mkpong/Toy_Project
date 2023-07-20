@@ -83,4 +83,19 @@ public class PostService {
         }
     }
 
+    public Page<Post> myPost(String id , int page , String keyword){
+        int userId = siteUserRepository.findByUserId(id).get().getId();
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(page, 10 ,Sort.by(sorts));
+        return postRepository.findBySiteUserIdAndPostTitleContainingOrSiteUserIdAndPostContentContaining(userId, pageable , keyword, userId, keyword);
+    }
+
+    public Page<Post> totalSearchPost(int page, String keyword){
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(page, 10 ,Sort.by(sorts));
+        return postRepository.findByPostTitleContainingOrPostContentContaining(pageable , keyword, keyword);
+    }
+
 }

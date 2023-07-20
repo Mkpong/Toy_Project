@@ -19,6 +19,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import allActions from './Actions';
 import BottomBar from './Component/BottomBar';
+import UserPost from './Component/User/UserPost';
+import TotalSearch from './Component/Post/TotalSearch';
 
 function App() {
 
@@ -57,6 +59,8 @@ function App() {
 
         <Route path="/post/write" element={<PostWrite />} />
         <Route path="/post/detail/:postid" element={<Postdetail />}/>
+        <Route path="/post/mypost/:userid" element={<UserPost />} />
+        <Route path="/post/search/:keyword" element={<TotalSearch />} />
       </Routes>
       <BottomBar />
     </Container>

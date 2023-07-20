@@ -5,6 +5,7 @@ import styles from './PostWrite.module.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import BoardTop from '../Board/BoardTop';
 
 function PostWrite() {
 
@@ -51,6 +52,7 @@ function PostWrite() {
 
     return (
         <Container className={styles.container_main}>
+            <BoardTop />
             <Row className={styles.row_1}>
                 <BoardLeftBar />
 

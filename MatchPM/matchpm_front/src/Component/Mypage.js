@@ -13,6 +13,12 @@ function Mypage (props) {
     const {userid} = useParams();
     const [view , setView] = useState("1");
 
+    useEffect(() => {
+        if(props.view){
+            setView("3");
+        }
+    } , [])
+
 
     return (
         <>
@@ -37,19 +43,18 @@ function Mypage (props) {
                             </Button>
                         </Col>
                     </Row>
-                    <Row className='text-center'>
+                    {/* <Row className='text-center'>
                         <Col className='mt-3'>
                             <Button variant='light' style={{width:'170px'}} onClick={() => setView("3")}>
                             My Post
                             </Button>
                         </Col>
-                    </Row>
+                    </Row> */}
                 </Container>
                 </Col>
             <Col>
             {view==="1" && <UserInfo id={userid} />}
             {view==="2" && <UserProject / >}
-            {view==="3" && <UserPost />}
                 </Col>
             </Row>
         </Container>

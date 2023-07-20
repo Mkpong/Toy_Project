@@ -11,12 +11,6 @@
     margin-top: 10px;
 }
 
-.row_3 {
-    background-color: red;
-    color: white;
-    margin-top: 10px;
-    margin: 5px 10px;
-}
 
 .col_1 {
     text-align: end;
@@ -25,12 +19,6 @@
 
 .col_2 {
     text-align: center;
-}
-
-.a_1 {
-    text-decoration: none;
-    color: white;
-    margin: 100px 0px;
 }
 
 

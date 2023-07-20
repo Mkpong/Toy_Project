@@ -1,6 +1,8 @@
 package com.example.matchpm_back.Repository;
 
+import com.example.matchpm_back.Entity.Post;
 import com.example.matchpm_back.Entity.SiteUser;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +12,7 @@ import java.util.Optional;
 public interface SiteUserRepository extends JpaRepository<SiteUser , Integer> {
 
     Optional<SiteUser> findByUserId(String userId);
+
+
+
 }

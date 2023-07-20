@@ -22,7 +22,7 @@ function BoardLeftBar() {
                 <Row className={styles.row_1}>
                     <Col className={styles.col_2}>Board</Col>
                 </Row>
-                {!currentUser.login ? (<Box1></Box1>) : (<Box2></Box2>)}
+                {!currentUser.login ? (<Box1></Box1>) : (<Box2 userId={currentUser.user}></Box2>)}
                 <Col><div className={styles.div_line_1}></div></Col>
                 <Row className={styles.row_10}>
                     {boardlist && boardlist.map((board) => (
@@ -52,7 +52,12 @@ const Box1 = () => {
     );
 }
 
-const Box2 = () => {
+//로그인 시 해당 박스 표시
+const Box2 = (props) => {
+
+    const userId = props.userId;
+
+    const [keyword , setKeyword] = useState();
     
     return (
         <>
@@ -66,16 +71,17 @@ const Box2 = () => {
         </Row>
         <Row className={styles.row_7}>
             <Col className='text-end'><Button variant='dark' size='sm' href='/post/write'>글쓰기</Button></Col>|
-            <Col className='text-start'><Button variant='dark' size='sm' href="#">My Post</Button></Col>
+            <Col className='text-start'><Button variant='dark' size='sm' href={`/post/mypost/${userId}`}>My Post</Button></Col>
         </Row>
         <Row className={styles.row_7}>
             <Col style={{display: 'flex' , margin: '0px 3px'}}>
                 <Form.Control
                     id="keyword"
                     placeholder='검색어 입력'
+                    onChange={(e) => setKeyword(e.target.value)}
                     size='sm'>
                 </Form.Control>
-                <Button style={{fontSize: '12px' , width:'50px'}} size='sm'>검색</Button>
+                <Button style={{fontSize: '12px' , width:'50px'}} size='sm' href={`/post/search/${keyword}`}>검색</Button>
             </Col>
         </Row>
         </>

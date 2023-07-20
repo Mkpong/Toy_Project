@@ -46,5 +46,18 @@ public class PostController {
         return postService.bestPost();
     } //가장 많은 추천을 받은 상위 10개의 글을 불러온다.
 
+    @GetMapping("/api/post/mypost")
+    public Page<Post> myPost(@RequestParam(value="id") String id ,
+                             @RequestParam(value="page" ,defaultValue = "0") int page,
+                             @RequestParam(value = "keyword") String keyword){
+        return postService.myPost(id , page , keyword);
+    }
+
+    @GetMapping("/api/post/total")
+    public Page<Post> totalSearchPost(@RequestParam(value="page" , defaultValue = "0") int page ,
+                                      @RequestParam(value="keyword") String keyword){
+        return postService.totalSearchPost(page, keyword);
+    }
+
 
 }

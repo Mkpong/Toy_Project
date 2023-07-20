@@ -16,15 +16,11 @@ function Post() {
     
     const location = useLocation();
 
-    useEffect(() => {
-        axios.get('/api/board/boardlist')
-        .then(response => setBoardlist(response.data))
-        .catch(error => console.log(error))
-    } , [])
+
 
     return (
         <Container className={styles.container_main}>
-            {boardlist && <BoardTop boardlist={boardlist} />}
+            <BoardTop />
             <Row className={styles.row_1}>
                 <BoardLeftBar />
                 <PostMain boardname={boardName} />
